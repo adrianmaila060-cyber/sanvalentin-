@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffe6f0;
+            text-align: center;
+            padding-top: 40px;
+            overflow: hidden;
+        }
+        h1 {
+            color: #d63384;
+        }
+        img {
+            width: 250px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        button {
+            font-size: 20px;
+            padding: 12px 25px;
+            margin: 10px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .si {
+            background-color: #ff4d6d;
+            color: white;
+        }
+        .no {
+            background-color: #adb5bd;
+            color: white;
+        }
+        .heart {
+            position: fixed;
+            bottom: -20px;
+            color: #ff4d6d;
+            font-size: 24px;
+            animation: floatUp 4s linear infinite;
+        }
+        @keyframes floatUp {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>¿Quieres ser mi San Valentín? 💖</h1>
+
+    <img src="foto.jpg" alt="Foto especial">
+
+    <br>
+
+    <button id="btnSi" class="si" onclick="decirSi()">Sí 💕</button>
+    <button id="btnNo" class="no" onclick="decirNo()">No 😢</button>
+
+    <h2 id="mensaje"></h2>
+
+    <script>
+        let contador = 0;
+        const mensajes = [
+            "¿Segura? 😏",
+            "Creo que debes pensarlo mejor 🤔",
+            "Piénsalo mejor 🥺",
+            "No, no es una opción 😈",
+            "¿Por qué sigues diciendo no? 😭"
+        ];
+
+        function decirNo() {
+            const btnNo = document.getElementById("btnNo");
+            const mensaje = document.getElementById("mensaje");
+
+            if (contador < mensajes.length) {
+                mensaje.innerText = mensajes[contador];
+                btnNo.style.transform = `scale(${1 - contador * 0.15})`;
+                contador++;
+            } else {
+                btnNo.style.display = "none";
+                const btnSi = document.getElementById("btnSi");
+                btnSi.style.transform = "scale(2.5)";
+                btnSi.style.fontSize = "40px";
+                mensaje.innerText = "Solo queda una opción 😌💖";
+            }
+        }
+
+        function decirSi() {
+            document.body.innerHTML = `
+                <h1 style="font-size:48px; color:#ff4d6d;">
+                    Nos vemos en San Valentín, preciosa 💖
+                </h1>
+            `;
+            for (let i = 0; i < 50; i++) {
+                crearCorazon();
+            }
+        }
+
+        function crearCorazon() {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerText = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+    </script>
+
+</body>
+</html>
